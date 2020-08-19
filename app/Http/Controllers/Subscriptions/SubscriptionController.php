@@ -7,8 +7,21 @@ use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    public function index()
+
+    public function __construct()
     {
-        return view('subscriptions.checkout');
+        $this->middleware(['auth']);
+    }
+
+    public function index(Request $request)
+    {
+        return view('subscriptions.checkout',[
+            'intent' => $request->user()->createSetupIntent()
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request);
     }
 }
