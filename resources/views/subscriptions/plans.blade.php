@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @foreach ($plans as $plan)
                         <div>
-                                <a href="#" >  {{$plan->title}} </a>
+                                <a href="{{ route('subscriptions',['plan' => $plan->slug]) }}" >  {{$plan->title}} </a>
                         </div>
                     @endforeach
                 </div>

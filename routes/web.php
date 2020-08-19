@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Subscriptions'], function(){
-    Route::get('plans', 'PlanController@index')->name('plans');
+    Route::get('plans', 'PlanController@index')->name('subscription.plans');
+    Route::get('/subscriptions', 'SubscriptionController@index')->name('subscriptions');
 
 });

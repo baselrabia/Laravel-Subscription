@@ -19,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
@@ -36,7 +38,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('plans') }}">{{ __('Plans') }}</a>
+                            <a class="nav-link" href="{{ route('subscription.plans') }}">{{ __('Plans') }}</a>
                         </li>
                     </ul>
 
