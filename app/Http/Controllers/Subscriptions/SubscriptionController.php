@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Subscriptions;
 
 use App\Http\Controllers\Controller;
+use App\Plan;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -22,6 +23,17 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+
+        $plan = Plan::where('slug', $request->plan)
+                ->orWhere('slug', 'monthly')
+                ->first();
+
+        $request->user()->newSubscription('default', $plan->stripe_id)
+            ->create($request->token);
+
+            return back();
     }
 }
