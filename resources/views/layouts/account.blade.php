@@ -16,15 +16,18 @@
                     <a href="{{ route('account.subscriptions') }}" class="nav-link"> Subscriptions </a>
                 </li>
                 @if(auth()->user()->subscribed())
-                    @if(!auth()->user()->subscription('default')->cancelled())
+
+                    @can('cancel',auth()->user()->subscription('default'))
                     <li class="nav-item">
                         <a href="{{ route('account.subscriptions.cancel') }}" class="nav-link"> Cancel Subscriptions </a>
                     </li>
-                    @else
+                    @endcan
+                    @can('resume',auth()->user()->subscription('default'))
                     <li class="nav-item">
                         <a href="{{ route('account.subscriptions.resume') }}" class="nav-link"> Resume Subscriptions </a>
                     </li>
-                    @endif
+                    @endcan
+
                 @endif
 
             </ul>
