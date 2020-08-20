@@ -21,10 +21,11 @@ class SubscriptionInvoiceController extends Controller
 
     public function show(Request $request, $id)
     {
-        return $request->user()->downloadInvoice($id, [
-            'vendor' => config('app.name'),
-            'product' => 'Membership'
-        ]);
+        return redirect($request->user()->findInvoice($id)->asStripeInvoice()->invoice_pdf);
+        // return $request->user()->downloadInvoice($id, [
+        //     'vendor' => config('app.name'),
+        //     'product' => 'Membership'
+        // ]);
     }
 
 }
