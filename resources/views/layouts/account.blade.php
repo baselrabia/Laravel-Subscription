@@ -17,18 +17,22 @@
                 </li>
                 @if(auth()->user()->subscribed())
 
-                    @can('cancel',auth()->user()->subscription('default'))
-                    <li class="nav-item">
-                        <a href="{{ route('account.subscriptions.cancel') }}" class="nav-link"> Cancel Subscriptions </a>
-                    </li>
-                    @endcan
-                    @can('resume',auth()->user()->subscription('default'))
-                    <li class="nav-item">
-                        <a href="{{ route('account.subscriptions.resume') }}" class="nav-link"> Resume Subscriptions </a>
-                    </li>
-                    @endcan
+                @can('cancel',auth()->user()->subscription('default'))
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.cancel') }}" class="nav-link"> Cancel Subscriptions </a>
+                </li>
+                @endcan
+                @can('resume',auth()->user()->subscription('default'))
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.resume') }}" class="nav-link"> Resume Subscriptions </a>
+                </li>
+                @endcan
 
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.invoices') }}" class="nav-link"> Invoices </a>
+                </li>
 
             </ul>
         </div>
