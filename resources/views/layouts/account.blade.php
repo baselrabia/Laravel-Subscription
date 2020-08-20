@@ -15,7 +15,13 @@
                 <li class="nav-item">
                     <a href="{{ route('account.subscriptions') }}" class="nav-link"> Subscriptions </a>
                 </li>
-
+                @if(auth()->user()->subscribed())
+                    @if(!auth()->user()->subscription('default')->cancelled())
+                        <li class="nav-item">
+                            <a href="{{ route('account.subscriptions.cancel') }}" class="nav-link"> Cancel Subscriptions </a>
+                        </li>
+                    @endif
+                @endif
             </ul>
         </div>
         <div class=" col-md-9">
