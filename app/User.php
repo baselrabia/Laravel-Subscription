@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\CustomerPresenter;
 use App\Presenters\InvoicePresenter;
 use App\Presenters\SubscriptionPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,6 +41,15 @@ class User extends Authenticatable
             return null;
         }
         return new InvoicePresenter($invoice);
+    }
+
+    public function presentCustomer()
+    {
+        if (!$this->hasStripeId()) {
+
+            return null;
+        }
+        return new CustomerPresenter($this->asStripeCustomer());
     }
 
 

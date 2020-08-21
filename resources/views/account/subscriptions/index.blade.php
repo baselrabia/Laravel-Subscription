@@ -10,7 +10,7 @@
         @if($subscription)
         <ul>
             <li>
-                plan: {{ auth()->user()->plan->title }} ({{$subscription->amount()}} / {{$subscription->interval() }})
+                plan : {{ auth()->user()->plan->title }} ({{$subscription->amount()}} / {{$subscription->interval() }})
 
                 @if(auth()->user()->subscription('default')->cancelled())
                 Ends {{$subscription->cancelAt()}}. <a href=" {{ route('account.subscriptions.resume') }} "> Resume </a>
@@ -18,7 +18,12 @@
             </li>
             @if($invoice)
             <li>
-                Next Payment: {{$invoice->amount()}} in {{$invoice->nextPaymentAttempt()}}
+                Next Payment : {{$invoice->amount()}} in {{$invoice->nextPaymentAttempt()}}
+            </li>
+            @endif
+            @if($customer)
+            <li>
+                Balance : {{$customer->balance()}}
             </li>
             @endif
         </ul>
