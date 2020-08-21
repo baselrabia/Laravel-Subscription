@@ -34,6 +34,10 @@
                     <a class="nav-link" href="{{ route('account.subscriptions.card') }}">
                         Update Plan</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('account.subscriptions.coupon') }}">
+                        Apply coupon</a>
+                </li>
                 @endif
 
                 <li class="nav-item">

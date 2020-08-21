@@ -47,6 +47,9 @@ Route::group(['namespace' => 'Account' ,'prefix' => 'account'], function () {
         Route::get('/card', 'SubscriptionCardController@index')->name('account.subscriptions.card');
         Route::post('/card', 'SubscriptionCardController@store');
 
+        Route::get('/coupon', 'SubscriptionCouponController@index')->name('account.subscriptions.coupon');
+        Route::post('/coupon', 'SubscriptionCouponController@store');
+
         Route::get('/invoices', 'SubscriptionInvoiceController@index')->name('account.subscriptions.invoices');
         Route::get('/invoices/{id}', 'SubscriptionInvoiceController@show')->name('account.subscriptions.invoice');
     });
