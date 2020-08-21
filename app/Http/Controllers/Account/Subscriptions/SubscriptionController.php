@@ -17,6 +17,8 @@ class SubscriptionController extends Controller
 
         return view('account.subscriptions.index',[
             'subscription' => $request->user()->presentSubscription(),
+            'invoice' => $request->user()->presentUpcomingInvoice(),
+
         ]);
     }
 }

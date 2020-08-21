@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\InvoicePresenter;
 use App\Presenters\SubscriptionPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,6 +32,17 @@ class User extends Authenticatable
         }
         return new SubscriptionPresenter($subscription->asStripeSubscription());
     }
+
+
+    public function presentUpcomingInvoice()
+    {
+        if (!$invoice = $this->upcomingInvoice()) {
+            return null;
+        }
+        return new InvoicePresenter($invoice);
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *
