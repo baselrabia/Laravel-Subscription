@@ -16,6 +16,13 @@
                 Ends {{$subscription->cancelAt()}}. <a href=" {{ route('account.subscriptions.resume') }} "> Resume </a>
                 @endif
             </li>
+            @if($coupon = $subscription->coupon())
+            <li>
+                Coupon : {{$coupon->name()}} ( {{$coupon->value()}} OFF )
+            </li>
+            @endif
+            @endif
+
             @if($invoice)
             <li>
                 Next Payment : {{$invoice->amount()}} in {{$invoice->nextPaymentAttempt()}}
@@ -27,7 +34,7 @@
             </li>
             @endif
         </ul>
-        @endif
+
         @else
         <p> Tou don't have a subscription</p>
         @endif

@@ -10,9 +10,8 @@ use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use NumberFormatter;
-use App\Presenters\CouponPresenter;
 
-class SubscriptionPresenter
+class CouponPresenter
 {
     protected $model;
 
@@ -22,9 +21,14 @@ class SubscriptionPresenter
 
     }
 
-    public function cancelAt()
+    public function name()
     {
-       return (new Carbon($this->model->cancel_at))->toDateString();
+        return $this->model->name;
+    }
+
+    public function percent()
+    {
+        return $this->model->percent_off . '%';
     }
 
     public function amount()
@@ -35,24 +39,19 @@ class SubscriptionPresenter
         );
 
         $money = new Money(
-            $this->model->plan->amount,
+            $this->model->amount_off,
             new Currency(strtoupper(config('cashier.currency')))
         );
 
         return $formatter->format($money);
     }
 
-    public function interval()
+    public function value()
     {
-        return $this->model->plan->interval;
+        return $this->model->amount_off ? $this->amount() : $this->percent();
     }
 
-    public function coupon()
-    {
-        if (!$discount = $this->model->discount) {
-            return null;
-        }
-        return new CouponPresenter($discount->coupon);
-    }
+
+
 }
 
