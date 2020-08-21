@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Account\Subscriptions;
 use App\Http\Controllers\Controller;
 use App\Plan;
 use Illuminate\Http\Request;
+use Laravel\Cashier\Exceptions\PaymentActionRequired;
 
 class SubscriptionSwapController extends Controller
 {
@@ -25,9 +26,20 @@ class SubscriptionSwapController extends Controller
             'plan' => 'required|exists:plans,slug'
         ]);
 
-        $request->user()->subscription('default')
-        ->swap(Plan::where('slug', $request->plan)->first()->stripe_id);
 
+        try {
+            $request->user()->subscription('default')
+            ->swap(Plan::where('slug', $request->plan)->first()->stripe_id);
+        } catch (PaymentActionRequired $e) {
+            return redirect()->route(
+                'cashier.payment',
+                [
+                    $e->payment->id,
+                    'redirect' => route('account.subscriptions')
+                ]
+            );
+        }
+        
         return redirect()->route('account.subscriptions');
     }
 }
