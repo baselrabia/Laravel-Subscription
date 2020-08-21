@@ -14,6 +14,9 @@ class SubscriptionController extends Controller
 
     public function index(Request $request)
     {
-        return view('account.subscriptions.index');
+
+        return view('account.subscriptions.index',[
+            'subscription' => $request->user()->presentSubscription(),
+        ]);
     }
 }

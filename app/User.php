@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\SubscriptionPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,15 @@ class User extends Authenticatable
             'user_id' ,'stripe_id' ,'id',
             'stripe_plan'
         );
+    }
+
+    public function presentSubscription()
+    {
+        if (!$subscription = $this->subscription('default')) {
+
+            return null;
+        }
+        return new SubscriptionPresenter($subscription->asStripeSubscription());
     }
     /**
      * The attributes that are mass assignable.
